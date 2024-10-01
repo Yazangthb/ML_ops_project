@@ -1,0 +1,24 @@
+# code/deployment/docker-compose.yml
+version: '3'
+
+services:
+  api:
+    build:
+      context: ./api
+    ports:
+      - "8000:8000"
+    networks:
+      - iris_network
+
+  app:
+    build:
+      context: ./app
+    ports:
+      - "8501:8501"
+    networks:
+      - iris_network
+    depends_on:
+      - api
+
+networks:
+  iris_network
